@@ -1,0 +1,45 @@
+{
+  "name": "projfrontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@stripe/react-stripe-js": "^1.0.2",
+    "@stripe/stripe-js": "^1.0.1",
+    "autoprefixer": "^10.4.13",
+    "braintree-web-drop-in": "^1.22.1",
+    "braintree-web-drop-in-react": "^1.1.0",
+    "next": "^13.0.1",
+    "postcss": "^8.4.18",
+    "query-string": "^6.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "tailwindcss": "^3.2.1",
+    "typescript": "^4.8.4"
+  }
+}
