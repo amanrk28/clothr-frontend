@@ -1,7 +1,9 @@
+import { NextPage } from 'next';
 import React from 'react';
+import Home from 'components/core/Home';
 
-function HomePage() {
-    return <div>Welcome to Next.js!</div>
+const HomePage: NextPage = () => {
+    return <Home />
 }
 
 export default HomePage

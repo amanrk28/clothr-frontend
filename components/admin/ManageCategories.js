@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { isAutheticated } from "../auth/helper";
-import { getCategories } from "./helper/adminapicall";
+import { getCategories } from "./helper/admin-api";
 
 const ManageCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -52,7 +52,7 @@ const ManageCategories = () => {
               </Link>
             </div>
             <div className="col-4">
-              <button onClick={() => {}} className="btn btn-danger">
+              <button onClick={() => { }} className="btn btn-danger">
                 Delete
               </button>
             </div>

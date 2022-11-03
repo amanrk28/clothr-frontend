@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { getCategories, createaProduct } from "./helper/adminapicall";
+import { getCategories, createProduct } from "./helper/admin-api";
 import { isAutheticated } from "../auth/helper/index";
 
 const AddProduct = () => {
@@ -54,7 +54,7 @@ const AddProduct = () => {
   const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
-    createaProduct(user._id, token, formData).then(data => {
+    createProduct(user._id, formData).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {

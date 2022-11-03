@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { loadCart, cartEmpty } from "./helper/cartHelper";
-import { Link } from "react-router-dom";
 import { getmeToken, processPayment } from "./helper/paymentbhelper";
 import { createOrder } from "./helper/orderHelper";
 import { isAutheticated } from "../auth/helper";
+import { useRouter } from "next/router";
+import toast from 'react-hot-toast';
 
-import DropIn from "braintree-web-drop-in-react";
+// import DropIn from "braintree-web-drop-in-react";
 
 const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
+  const router = useRouter();
   const [info, setInfo] = useState({
     loading: false,
     success: false,
@@ -15,31 +17,38 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
     error: "",
     instance: {}
   });
+  const { user, token } = isAutheticated();
 
-  const userId = isAutheticated() && isAutheticated().user._id;
-  const token = isAutheticated() && isAutheticated().token;
+  useEffect(() => {
+    if (!user || !token) {
+      toast.error('Signin to view your cart!');
+      router.push('/signin');
+    }
+  }, []);
 
-  const getToken = (userId, token) => {
-    getmeToken(userId, token).then(info => {
-      // console.log("INFORMATION", info);
-      if (info.error) {
-        setInfo({ ...info, error: info.error });
-      } else {
-        const clientToken = info.clientToken;
-        setInfo({ clientToken });
-      }
-    });
-  };
+  const userId = user && user?._id;
+
+  // const getToken = (userId, token) => {
+  //   getmeToken(userId, token).then(info => {
+  //     // console.log("INFORMATION", info);
+  //     if (info?.error) {
+  //       setInfo({ ...info, error: info.error });
+  //     } else {
+  //       const clientToken = info?.clientToken;
+  //       setInfo({ clientToken });
+  //     }
+  //   });
+  // };
 
   const showbtdropIn = () => {
     return (
       <div>
         {info.clientToken !== null && products.length > 0 ? (
           <div>
-            <DropIn
+            {/* <DropIn
               options={{ authorization: info.clientToken }}
               onInstance={instance => (info.instance = instance)}
-            />
+            /> */}
             <button className="btn btn-block btn-success" onClick={onPurchase}>
               Buy
             </button>
@@ -51,9 +60,9 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
     );
   };
 
-  useEffect(() => {
-    getToken(userId, token);
-  }, []);
+  // useEffect(() => {
+  //   getToken(userId, token);
+  // }, []);
 
   const onPurchase = () => {
     setInfo({ loading: true });
@@ -73,7 +82,7 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
             transaction_id: response.transaction.id,
             amount: response.transaction.amount
           };
-          createOrder(userId, token, orderData);
+          createOrder(userId, orderData);
           cartEmpty(() => {
             console.log("Did we got a crash?");
           });
@@ -97,7 +106,7 @@ const Paymentb = ({ products, setReload = f => f, reload = undefined }) => {
 
   return (
     <div>
-      <h3>Your bill is {getAmount()} $</h3>
+      <h3>Your bill is &#8377;{getAmount()}</h3>
       {showbtdropIn()}
     </div>
   );
