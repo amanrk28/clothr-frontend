@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import React from 'react';
-import PrivateRoute from 'components/auth/helper/PrivateRoutes.js';
+import PrivateRoute from 'components/auth/helper/PrivateRoutes';
 import UserDashBoard from 'components/user/UserDashBoard';
 
 const UserDashBoardPage: NextPage = () => {

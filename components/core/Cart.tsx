@@ -1,9 +1,9 @@
 import { Product } from "components/types";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Base from "./Base";
 import Card from "./Card";
 import { loadCart } from "./helper/cartHelper";
-import Paymentb from "./Paymentb";
 
 const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -13,39 +13,39 @@ const Cart = () => {
     setProducts(loadCart());
   }, [reload]);
 
-  const loadCheckout = () => {
-    return (
-      <div>
-        <h2>This section for checkout</h2>
-      </div>
-    );
-  };
-
   return (
     <Base title="Cart Page" description="Ready to checkout">
-      <div className="row text-center">
-        <div className="col-6">
-          {products.length > 0 ? (
+      <div className="flex flex-col justify-center items-center md:flex-row md:items-start">
+        <div className="flex flex-wrap justify-center items-start w-1/2 p-4">
+          {products?.length > 0 ? (
             <div>
-              <h2>This section is to load products</h2>
+              <h2 className="text-center text-lg font-medium">Your Products</h2>
               {products.map((product, index) => (
-                <Card
-                  key={index}
-                  product={product}
-                  removeFromCart={true}
-                  addtoCart={false}
-                  setReload={setReload}
-                  reload={reload}
-                />
+                <div key={index} className="p-6">
+                  <Card
+                    product={product}
+                    removeFromCart={true}
+                    addtoCart={false}
+                    setReload={setReload}
+                    reload={reload}
+                  />
+                </div>
               ))}
             </div>
           ) : (
-            <h4>No products</h4>
+            <>
+              <h1 className="text-4xl py-8">No products in cart</h1>
+              <p className="mt-4 text-2xl">
+                Go to <Link href="/" className="underline hover:text-blue-500">store</Link>
+              </p>
+            </>
           )}
         </div>
-        {/* <div className="col-6">
-          <Paymentb products={products} setReload={setReload} />
-        </div> */}
+        {products?.length > 0 ? (
+          <div className="flex flex-wrap justify-center items-start w-1/2 p-4">
+            <h2 className="text-center text-lg font-medium">Checkout</h2>
+          </div>
+        ) : null}
       </div>
     </Base>
   );

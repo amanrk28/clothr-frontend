@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Base from "../core/Base";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import { isAutheticated } from "../auth/helper";
 import { getProducts, deleteProduct } from "./helper/admin-api";
 

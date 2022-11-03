@@ -1,18 +1,37 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
 import Base from "../core/Base";
-import { signup } from "../auth/helper";
+import { authenticate, isAutheticated, signup } from "../auth/helper";
 import { AuthPayload } from "components/auth/helper/types";
+import { inputClasses } from "./Signin";
+import { useRouter } from "next/router";
 
 const Signup = () => {
-  const [values, setValues] = useState<AuthPayload>({
+  const router = useRouter();
+  const [values, setValues] = useState<AuthPayload & { didRedirect: boolean }>({
     name: "",
     email: "",
     password: "",
+    didRedirect: false,
   });
 
-  const { name, email, password } = values;
+  const { name, email, password, didRedirect } = values;
+  const { user } = isAutheticated();
+
+
+  useEffect(() => {
+    if (didRedirect) {
+      if (user && user?.role === 1) {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/user/dashboard');
+      }
+    }
+    if (user) {
+      router.push('/');
+    }
+  }, [didRedirect]);
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [fieldName]: event.target.value });
@@ -27,12 +46,14 @@ const Signup = () => {
         if (data.error) {
           throw data.error;
         } else {
-          setValues({
-            ...values,
-            name: "",
-            email: "",
-            password: "",
-          });
+          authenticate(data, () => {
+            setValues({
+              name: "",
+              email: "",
+              password: "",
+              didRedirect: true
+            });
+          })
           return 'Signup Successful'
         }
       },
@@ -41,43 +62,41 @@ const Signup = () => {
   }
 
   return (
-    <Base title="Sign up page" description="A page for user to sign up!">
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <form>
-            <div className="form-group">
-              <label className="text-light">Name</label>
-              <input
-                className="form-control"
-                onChange={handleChange("name")}
-                type="text"
-                value={name}
-              />
-            </div>
-            <div className="form-group">
-              <label className="text-light">Email</label>
-              <input
-                className="form-control"
-                onChange={handleChange("email")}
-                type="email"
-                value={email}
-              />
-            </div>
+    <Base title="Sign up page" description="A page for user to sign up!" className="py-20 text-white">
+      <div className="bg-neutral-500 max-w-lg m-auto p-4 rounded">
+        <form>
+          <div className="py-4">
+            <label className="text-light">Name</label>
+            <input
+              onChange={handleChange("name")}
+              type="text"
+              className={inputClasses}
+              value={name}
+            />
+          </div>
+          <div className="py-4">
+            <label className="text-light">Email</label>
+            <input
+              onChange={handleChange("email")}
+              type="email"
+              className={inputClasses}
+              value={email}
+            />
+          </div>
 
-            <div className="form-group">
-              <label className="text-light">Password</label>
-              <input
-                onChange={handleChange("password")}
-                className="form-control"
-                type="password"
-                value={password}
-              />
-            </div>
-            <button onClick={onSubmit} className="btn btn-success btn-block">
-              Submit
-            </button>
-          </form>
-        </div>
+          <div className="py-4">
+            <label className="text-light">Password</label>
+            <input
+              onChange={handleChange("password")}
+              type="password"
+              className={inputClasses}
+              value={password}
+            />
+          </div>
+          <button onClick={onSubmit} className="rounded p-4 w-full mt-6 font-semibold border border-white bg-transparent hover:bg-white text-white hover:text-neutral-500 hover:shadow-md duration-300">
+            Submit
+          </button>
+        </form>
       </div>
     </Base>
   );

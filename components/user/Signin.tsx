@@ -4,11 +4,13 @@ import { signin, authenticate, isAutheticated } from "components/auth/helper";
 import { useRouter } from "next/router";
 import toast from 'react-hot-toast';
 
+export const inputClasses = "w-full bg-transparent border-t-0 border-x-0 border-white focus:outline-none focus:shadow-none focus:border-white focus:ring-0 placeholder:text-white placeholder:opacity-40";
+
 const Signin = () => {
   const router = useRouter();
   const [values, setValues] = useState({
-    email: "amanalt@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
     error: false,
     loading: false,
     didRedirect: false
@@ -57,56 +59,40 @@ const Signin = () => {
     })
   };
 
-  const errorMessage = () => {
-    return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <div
-            className="alert alert-danger"
-            style={{ display: error ? "" : "none" }}
-          >
-            {error}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <Base title="Sign In page" description="A page for user to sign in!">
+    <Base title="Sign In page" description="A page for user to sign in!" className="py-20 text-white">
       {loading && (
         <div className="alert alert-info">
           <h2>Loading...</h2>
         </div>
       )}
-      {errorMessage()}
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <form>
-            <div className="form-group">
-              <label className="text-light">Email</label>
-              <input
-                onChange={handleChange("email")}
-                value={email}
-                className="form-control"
-                type="email"
-              />
-            </div>
+      <div className="bg-neutral-500 max-w-lg m-auto p-4 rounded">
+        <form>
+          <div className="py-4">
+            <label htmlFor="email" className="text-light">Email </label>
+            <input
+              onChange={handleChange("email")}
+              value={email}
+              className={inputClasses}
+              type="email"
+              placeholder="example@email.com"
+            />
+          </div>
 
-            <div className="form-group">
-              <label className="text-light">Password</label>
-              <input
-                onChange={handleChange("password")}
-                value={password}
-                className="form-control"
-                type="password"
-              />
-            </div>
-            <button onClick={onSubmit} className="btn btn-success btn-block">
-              Submit
-            </button>
-          </form>
-        </div>
+          <div className="py-4">
+            <label htmlFor="password" className="text-light">Password </label>
+            <input
+              id='password'
+              onChange={handleChange("password")}
+              value={password}
+              className={inputClasses}
+              type="password"
+            />
+          </div>
+          <button onClick={onSubmit} className="rounded p-4 w-full mt-6 font-semibold border border-white bg-transparent hover:bg-white text-white hover:text-neutral-500 hover:shadow-md duration-300">
+            Submit
+          </button>
+        </form>
       </div>
     </Base>
   );

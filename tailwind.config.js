@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
 
 module.exports = {
     content: [
@@ -23,6 +22,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
                 space: ["Space Mono", ...defaultTheme.fontFamily.sans],
                 azonix: ["Azonix", ...defaultTheme.fontFamily.sans],
                 aspace: ["Aspace", ...defaultTheme.fontFamily.sans],
@@ -46,15 +46,6 @@ module.exports = {
         },
     },
     plugins: [
-        plugin(function ({ matchUtilities, theme }) {
-            matchUtilities(
-                {
-                    "text-shadow": (value) => ({
-                        textShadow: value,
-                    }),
-                },
-                { values: theme("textShadow") }
-            );
-        }),
+        require("@tailwindcss/forms")
     ],
 };

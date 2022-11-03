@@ -16,7 +16,7 @@ export const apiCall = async (method: Method, url: string, data={}, isFormData: 
     if (token) {
       headers = {
         ...headers,
-        Authorization: `Token ${token}`,
+        Authorization: `Bearer ${token}`,
       };
     }
     const options: any = {

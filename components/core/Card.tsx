@@ -3,6 +3,7 @@ import { ImageHelper } from "./helper/ImageHelper";
 import { addItemToCart, removeItemFromCart } from "./helper/cartHelper";
 import { Product } from 'components/types';
 import { useRouter } from "next/router";
+import toast from 'react-hot-toast';
 
 interface CartProps {
   product: Product;
@@ -26,34 +27,33 @@ const Card = ({
 
   const addToCart = () => {
     addItemToCart(product, () => {
+      toast.success('Added product to cart!')
       router.push('/cart');
     });
   };
 
   return (
-    <div className="text-white w-[280px] h-[360px] flex flex-col items-center border-2 rounded">
+    <div className="text-white w-[300px] h-[380px] flex flex-col items-center rounded shadow-lg shadow-green-500">
       <div className="w-full h-full flex flex-col items-center">
         <ImageHelper product={product} />
-        <h1 className="text-2xl font-bold py-2">{cartTitle}</h1>
+        <h1 className="text-xl font-semibold py-2">{cartTitle}</h1>
         <p className="w-full p-2 font-weight-normal truncate">
           {cartDescrption}
         </p>
         <p className="btn px-4 font-semibold text-xl ">&#8377; {cartPrice}</p>
       </div>
 
-      <div className="w-full">
+      <div className="w-full rounded-b">
         {addtoCart ? (
-          <button className="bg-green-600 w-full py-2 font-medium"
+          <button className="bg-green-600 w-full py-2 font-medium hover:text-lg duration-300 ease-in-out rounded-b"
             onClick={addToCart}
           >
-            <div>
-              Add to Cart
-            </div>
+            Add to Cart
           </button>
         )
           : null}
         {removeFromCart ? (
-          <button className="bg-green-600 w-full py-2 font-medium" onClick={() => {
+          <button className="bg-green-600 w-full py-2 font-medium hover:text-lg duration-300 ease-in-out rounded-b" onClick={() => {
             removeItemFromCart(product._id);
             setReload(!reload);
           }}

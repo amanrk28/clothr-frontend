@@ -23,15 +23,12 @@ export default function Home() {
 
   return (
     <Base title="Home Page" description="Welcome to the Tshirt Store">
-      <div className="row text-center">
-        <h1 className="text-white">All of tshirts</h1>
-        <div className="flex flex-wrap justify-center">
-          {[...products, ...products, ...products, ...products].map((product, index) => (
-            <div key={index} className="p-4">
-              <Card product={product} />
-            </div>
-          ))}
-        </div>
+      <div className="flex flex-wrap justify-center">
+        {[...products, ...products, ...products, ...products].map((product, index) => (
+          <div key={index} className="p-6">
+            <Card product={product} />
+          </div>
+        ))}
       </div>
     </Base>
   );

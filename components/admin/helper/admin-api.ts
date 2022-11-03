@@ -1,40 +1,35 @@
-import { API, apiCall } from "../../backend";
+import { apiCall } from "../../backend";
 
 //category calls
-export const createCategory = (userId, category) => {
+export const createCategory = (userId: string, category: string) => {
   return apiCall('post', `/category/create/${userId}`, category)
 };
 
-//get all categories
 export const getCategories = () => {
   return apiCall('get', '/categories');
 };
 
+export const deleteCategory = (categoryId: string, userId: string) => {
+  return apiCall('delete', `/category/${categoryId}/${userId}`)
+}
+
 //products calls
-//create a product
-export const createProduct = (userId, product) => {
+export const createProduct = (userId: string, product: FormData) => {
   return apiCall('post', `/product/create/${userId}`, product, true);
 };
 
-//get all products
 export const getProducts = () => {
   return apiCall('get', '/products');
 };
 
-//delete a product
-
-export const deleteProduct = (productId, userId) => {
+export const deleteProduct = (productId: string, userId: string ) => {
   return apiCall('delete', `/product/${productId}/${userId}`);
 };
 
-//get a product
-
-export const getProduct = productId => {
+export const getProduct = (productId: string) => {
   return apiCall('get', `product/${productId}`);
 };
 
-//update a product
-
-export const updateProduct = (productId, userId, product) => {
+export const updateProduct = (productId: string, userId: string, product: FormData) => {
   return apiCall('put', `/product/${productId}/${userId}`, product, true);
 };

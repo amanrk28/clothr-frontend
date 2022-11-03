@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 import {
   getCategories,
   getProduct,
@@ -199,7 +199,7 @@ const UpdateProduct = ({ match }) => {
       description="Welcome to product creation section"
       className="container bg-info p-4"
     >
-      <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
+      <Link href="/admin/dashboard" className="btn btn-md btn-dark mb-3">
         Admin Home
       </Link>
       <div className="row bg-dark text-white rounded">
