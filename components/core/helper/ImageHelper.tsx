@@ -11,8 +11,7 @@ export const ImageHelper = ({ product }: { product: Product }) => {
     <img
       src={imageurl}
       alt="photo"
-      className="rounded-t"
-      style={{ width: '100%', maxHeight: "100%", maxWidth: "100%" }}
+      className="rounded-t h-fit hover:scale-y-[1.2] duration-300"
     />
   );
 };

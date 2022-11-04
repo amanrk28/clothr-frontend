@@ -33,17 +33,17 @@ const Card = ({
   };
 
   return (
-    <div className={`text-white w-[300px] h-[380px] flex flex-col items-center rounded shadow-lg ${addtoCart ? 'shadow-green-500/60' : ''} ${removeFromCart ? 'shadow-gray-500/60' : ''}`}>
+    <div className={`text-white w-[300px] h-[380px] flex flex-col items-center shadow-lg ${addtoCart ? 'shadow-green-500/60' : ''} ${removeFromCart ? 'shadow-gray-500/60' : ''}`}>
       <div className="w-full h-full flex flex-col items-center">
         <ImageHelper product={product} />
-        <h1 className="text-xl font-semibold py-2">{cartTitle}</h1>
+        <h1 className="text-xl font-semibold pt-8">{cartTitle}</h1>
         <p className="w-full p-2 font-weight-normal truncate">
           {cartDescrption}
         </p>
         <p className="btn px-4 font-semibold text-xl ">&#8377; {cartPrice}</p>
       </div>
 
-      <div className="w-full rounded-b">
+      <div className="w-full">
         {addtoCart ? (
           <button className="btn-grad-success w-full py-2 font-medium rounded-b"
             onClick={addToCart}

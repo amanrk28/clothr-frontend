@@ -26,7 +26,7 @@ const Cart = () => {
   }, [reload]);
 
   return (
-    <Base title="Cart Page" description="Ready to checkout">
+    <Base title="Cart Page">
       <div className="flex flex-col justify-center items-center md:flex-row md:items-start">
         <div className="flex flex-wrap justify-center items-start w-1/2 p-4">
           {products?.length > 0 ? (

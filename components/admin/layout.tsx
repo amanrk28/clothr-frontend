@@ -23,11 +23,11 @@ export const LeftSide = () => {
     const router = useRouter();
     return (
         <div className="w-full h-full md:w-3/12 p-4 border-b-2 md:border-b-0 md:border-r-2">
-            <div className="flex flex-col items-start bg-white rounded p-4">
+            <div className="flex flex-col items-start rounded p-4">
                 {navbarLinks.map((item, index) => (
-                    <Link key={index} href={item.link} className="py-4 pl-4 pr-20 hover:scale-110 transition-all ease-out duration-300">
-                        <p className="relative">
-                            <span className="absolute -left-4">{router.pathname === item.link && '>'}</span> {item.name}
+                    <Link key={index} href={item.link} className="py-4 pl-4 w-full hover:scale-110 hover:underline transition-all ease-out duration-300">
+                        <p className="relative text-lg">
+                            <span className="absolute -left-4 text-green-600 font-bold">{router.pathname === item.link && '>'}</span> {item.name}
                         </p>
                     </Link>
                 ))}
@@ -44,7 +44,7 @@ interface RightSideProps {
 export const RightSide: React.FC<RightSideProps> = ({ title, children }) => {
     return (
         <div className="w-full md:w-9/12 p-4 overflow-y-scroll h-full">
-            <div className="flex flex-col items-start bg-white rounded p-4">
+            <div className="flex flex-col items-start rounded p-4">
                 <h4 className="text-green-600 text-2xl font-medium pb-4">{title}</h4>
                 <div className="w-full">
                     {children}
@@ -71,7 +71,7 @@ export const AdminLayout: React.FC<Props> = ({
         <Base
             title=""
             description=""
-            className={`bg-white md:h-[calc(100vh-80px)] flex flex-col md:flex-row justify-center items-start ${className}`}
+            className={`text-white md:h-[calc(100vh-80px)] flex flex-col md:flex-row justify-center items-start ${className}`}
         >
             <LeftSide />
             <RightSide title={title}>

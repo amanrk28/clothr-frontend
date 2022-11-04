@@ -1,5 +1,4 @@
 import React from "react";
-import { Menu } from "./Menu";
 
 interface BaseProps {
   title?: string;
@@ -9,14 +8,14 @@ interface BaseProps {
 }
 
 const Base: React.FC<BaseProps> = ({
-  title = "My Title",
-  description = "My desription",
+  title = "Welcome",
+  description = "",
   className = "bg-dark text-white p-4",
   children
 }) => (
   <div>
     <section className="w-full">
-      {title && description && (
+      {title && (
         <main className="text-white text-center p-4">
           <h2 className="text-4xl">{title}</h2>
           <p className="text-lg">{description}</p>

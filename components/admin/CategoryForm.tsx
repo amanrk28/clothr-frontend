@@ -1,6 +1,6 @@
 import React from "react";
 
-const inputClasses = "w-full bg-white border-t-0 border-x-0 border-neutral-500 focus:outline-none focus:shadow-none focus:border-neutral-500 focus:ring-0 placeholder:text-neutral-500 placeholder:opacity-40";
+const inputClasses = "w-full bg-inherit border-t-0 border-x-0 border-neutral-500 focus:outline-none focus:shadow-none focus:border-neutral-500 focus:ring-0 placeholder:text-neutral-500 placeholder:opacity-40";
 
 interface Props {
     handleChange: (value: string) => void;
@@ -30,7 +30,7 @@ export const CategoryForm: React.FC<Props> = ({
                     placeholder="For Ex. Summer"
                 />
                 <div className="flex flex-col md:flex-row justify-between">
-                    <button onClick={onSubmit} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-lime-500 text-lime-500 bg-transparent hover:text-white hover:bg-lime-500 hover:shadow-md duration-300">
+                    <button onClick={onSubmit} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-green-600 text-green-600 bg-transparent hover:text-white hover:bg-green-600 hover:shadow-md duration-300">
                         {isUpdate ? 'Update' : 'Create'} Category
                     </button>
                     {isUpdate ? (
