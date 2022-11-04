@@ -24,3 +24,23 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.btn-grad-success {
+  background-image: linear-gradient(to right, #408b1e 0%, #95db3f 51%, #408b1e 100%);
+  transition: 0.4s;
+  background-size: 200% auto;
+}
+
+.btn-grad-success:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+.btn-grad-danger {
+  background-image: linear-gradient(to right, #d31027 0%, #ea384d 51%, #d31027 100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+}
+
+.btn-grad-danger:hover {
+  background-position: right center; /* change the direction of the change here */
+}

@@ -1,6 +1,9 @@
-import { Product } from "components/types";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import { isAutheticated } from "components/auth/helper";
+import { Product } from "components/types";
 import Base from "./Base";
 import Card from "./Card";
 import { loadCart } from "./helper/cartHelper";
@@ -8,6 +11,15 @@ import { loadCart } from "./helper/cartHelper";
 const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [reload, setReload] = useState(false);
+  const { user, token } = isAutheticated();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user || !token) {
+      toast.error('Login to view cart');
+      router.push('/');
+    }
+  }, [])
 
   useEffect(() => {
     setProducts(loadCart());
@@ -33,12 +45,12 @@ const Cart = () => {
               ))}
             </div>
           ) : (
-            <>
+            <div className="flex flex-col items-center">
               <h1 className="text-4xl py-8">No products in cart</h1>
               <p className="mt-4 text-2xl">
-                Go to <Link href="/" className="underline hover:text-blue-500">store</Link>
+                <Link href="/" className="underline hover:text-green-500">Start shopping</Link>
               </p>
-            </>
+            </div>
           )}
         </div>
         {products?.length > 0 ? (

@@ -11,12 +11,10 @@ const Signin = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
-    error: false,
-    loading: false,
     didRedirect: false
   });
 
-  const { email, password, error, loading, didRedirect } = values;
+  const { email, password, didRedirect } = values;
   const { user } = isAutheticated();
 
   useEffect(() => {
@@ -33,17 +31,15 @@ const Signin = () => {
   }, [didRedirect]);
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, error: false, [fieldName]: event.target.value });
+    setValues({ ...values, [fieldName]: event.target.value });
   };
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setValues({ ...values, error: false, loading: true });
     toast.promise(signin({ email, password }), {
       loading: 'Signing In...',
       success: (data) => {
         if (data.error) {
-          setValues({ ...values, error: data.error, loading: false });
           throw data.error;
         } else {
           authenticate(data, () => {
@@ -60,12 +56,7 @@ const Signin = () => {
   };
 
   return (
-    <Base title="Sign In page" description="A page for user to sign in!" className="py-20 text-white">
-      {loading && (
-        <div className="alert alert-info">
-          <h2>Loading...</h2>
-        </div>
-      )}
+    <Base title="Sign In " description="" className="py-20 px-4 text-white">
       <div className="bg-neutral-500 max-w-lg m-auto p-4 rounded">
         <form>
           <div className="py-4">
@@ -78,7 +69,6 @@ const Signin = () => {
               placeholder="example@email.com"
             />
           </div>
-
           <div className="py-4">
             <label htmlFor="password" className="text-light">Password </label>
             <input

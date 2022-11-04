@@ -10,9 +10,12 @@ export type Method =
 
 export const apiCall = async (method: Method, url: string, data={}, isFormData: boolean = false) => {
     const {token} = isAutheticated();
-    let headers: any = {
-      'Content-Type': 'application/json',
-    };
+    let headers: any = {};
+    if (!isFormData) {
+      headers = {
+        'Content-Type': 'application/json',
+      }
+    }
     if (token) {
       headers = {
         ...headers,
@@ -25,6 +28,9 @@ export const apiCall = async (method: Method, url: string, data={}, isFormData: 
     };
     if (method !== 'get' && !isFormData) {
       options.body = JSON.stringify(data);
+    }
+    if (isFormData) {
+      options.body = data;
     }
     const res = await fetch(API + url, options);
     return await res.json();

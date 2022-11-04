@@ -1,14 +1,14 @@
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import Base from "../core/Base";
-import Link from "next/link";
 import { isAutheticated } from "../auth/helper";
 import { deleteCategory, getCategories } from "./helper/admin-api";
-import { LeftSide } from "components/user/AdminDashBoard";
 import toast from "react-hot-toast";
 import { Category } from "./types";
+import { AdminLayout } from "./layout";
 
 const ManageCategories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const router = useRouter();
   const { user } = isAutheticated();
 
   const preload = () => {
@@ -20,6 +20,11 @@ const ManageCategories = () => {
       }
     });
   };
+
+  const onUpdateCategory = (category: Category) => (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    router.push(`/admin/update/category/${category._id}`)
+  }
 
   const onDeleteCategory = (category) => (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -45,38 +50,24 @@ const ManageCategories = () => {
   }, []);
 
   return (
-    <Base
-      title="Manage your categories"
-      description="Update or delete categories here"
-      className="bg-green-600 p-4 flex justify-center items-start"
-    >
-      <div className="w-3/12">
-        <LeftSide />
-      </div>
-      <div className="w-9/12">
-        <div className="bg-white m-4 p-4 rounded">
-          <h4 className="text-2xl font-medium text-green-600">Total {categories.length} Categories</h4>
-          {categories.map((category, index) => (
-            <div className="flex justify-between" key={index}>
-              <h3 className="text-xl">
-                {category.name}
-              </h3>
-              <div className="text-center mb-2">
-                <Link
-                  className="bg-blue-400 text-white px-4 py-2 rounded mx-2"
-                  href={`/admin/product/update/${category._id}`}
-                >
-                  Update
-                </Link>
-                <button onClick={onDeleteCategory(category)} className="bg-red-400 text-white px-4 py-2 rounded mx-2">
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+    <AdminLayout title="Manage your categories">
+      {categories.map((category, index) => (
+        <div className="flex flex-col md:flex-row md:items-center justify-between border-b-2 p-2" key={index}>
+          <h3 className="text-xl">{category.name}</h3>
+          <div className="flex justify-between text-center">
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
+              onClick={onUpdateCategory(category)}
+            >
+              Update
+            </button>
+            <button onClick={onDeleteCategory(category)} className="btn-grad-danger text-white px-4 py-2 rounded mx-2">
+              Delete
+            </button>
+          </div>
         </div>
-      </div>
-    </Base>
+      ))}
+    </AdminLayout>
   );
 };
 

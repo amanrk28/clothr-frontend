@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
 import Base from "../core/Base";
@@ -18,7 +17,6 @@ const Signup = () => {
 
   const { name, email, password, didRedirect } = values;
   const { user } = isAutheticated();
-
 
   useEffect(() => {
     if (didRedirect) {
@@ -62,7 +60,7 @@ const Signup = () => {
   }
 
   return (
-    <Base title="Sign up page" description="A page for user to sign up!" className="py-20 text-white">
+    <Base title="Sign up page" description="" className="py-20 px-4 text-white">
       <div className="bg-neutral-500 max-w-lg m-auto p-4 rounded">
         <form>
           <div className="py-4">

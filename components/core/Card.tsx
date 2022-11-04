@@ -33,7 +33,7 @@ const Card = ({
   };
 
   return (
-    <div className="text-white w-[300px] h-[380px] flex flex-col items-center rounded shadow-lg shadow-green-500">
+    <div className={`text-white w-[300px] h-[380px] flex flex-col items-center rounded shadow-lg ${addtoCart ? 'shadow-green-500/60' : ''} ${removeFromCart ? 'shadow-gray-500/60' : ''}`}>
       <div className="w-full h-full flex flex-col items-center">
         <ImageHelper product={product} />
         <h1 className="text-xl font-semibold py-2">{cartTitle}</h1>
@@ -45,7 +45,7 @@ const Card = ({
 
       <div className="w-full rounded-b">
         {addtoCart ? (
-          <button className="bg-green-600 w-full py-2 font-medium hover:text-lg duration-300 ease-in-out rounded-b"
+          <button className="btn-grad-success w-full py-2 font-medium rounded-b"
             onClick={addToCart}
           >
             Add to Cart
@@ -53,7 +53,7 @@ const Card = ({
         )
           : null}
         {removeFromCart ? (
-          <button className="bg-green-600 w-full py-2 font-medium hover:text-lg duration-300 ease-in-out rounded-b" onClick={() => {
+          <button className="btn-grad-danger w-full py-2 font-medium rounded-b" onClick={() => {
             removeItemFromCart(product._id);
             setReload(!reload);
           }}

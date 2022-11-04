@@ -18,7 +18,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    loadAllProduct();
+    if (products.length === 0)
+      loadAllProduct();
   }, []);
 
   return (

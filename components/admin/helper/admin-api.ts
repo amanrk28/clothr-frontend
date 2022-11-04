@@ -1,13 +1,22 @@
+import { Category } from './../types';
 import { apiCall } from "../../backend";
 
 //category calls
-export const createCategory = (userId: string, category: string) => {
+export const createCategory = (userId: string, category: Pick<Category, "name">) => {
   return apiCall('post', `/category/create/${userId}`, category)
 };
 
 export const getCategories = () => {
   return apiCall('get', '/categories');
 };
+export const getCategory = (categoryId: string) => {
+  return apiCall('get', `/category/${categoryId}`);
+};
+
+export const updateCategory = (categoryId: string, userId: string, category: Pick<Category, 'name'>) => {
+  return apiCall('put', `/category/${categoryId}/${userId}`, category);
+};
+
 
 export const deleteCategory = (categoryId: string, userId: string) => {
   return apiCall('delete', `/category/${categoryId}/${userId}`)
@@ -27,7 +36,7 @@ export const deleteProduct = (productId: string, userId: string ) => {
 };
 
 export const getProduct = (productId: string) => {
-  return apiCall('get', `product/${productId}`);
+  return apiCall('get', `/product/${productId}`);
 };
 
 export const updateProduct = (productId: string, userId: string, product: FormData) => {

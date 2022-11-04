@@ -10,6 +10,9 @@ export const Menu = () => {
   const router = useRouter();
   const { user } = isAutheticated();
   const currentTab = (path: string) => {
+    if (path.includes('admin') && router.pathname.includes('admin')) {
+      return { color: "#2ecc72", fontWeight: 600 };
+    }
     if (router.pathname === path) {
       return { color: "#2ecc72", fontWeight: 600 };
     }
