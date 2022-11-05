@@ -1,8 +1,8 @@
-import React from "react";
-import { ImageHelper } from "./helper/ImageHelper";
-import { addItemToCart, removeItemFromCart } from "./helper/cartHelper";
+import React from 'react';
+import { ImageHelper } from './helper/ImageHelper';
+import { addItemToCart, removeItemFromCart } from './helper/cartHelper';
 import { Product } from 'components/types';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 
 interface CartProps {
@@ -18,12 +18,12 @@ const Card = ({
   addtoCart = true,
   removeFromCart = false,
   setReload = f => f,
-  reload = undefined
+  reload = undefined,
 }: CartProps) => {
   const router = useRouter();
-  const cartTitle = product ? product.name : "A photo from pexels";
-  const cartDescrption = product ? product.description : "Default description";
-  const cartPrice = product ? product.price : "DEFAULT";
+  const cartTitle = product ? product.name : 'A photo from pexels';
+  const cartDescrption = product ? product.description : 'Default description';
+  const cartPrice = product ? product.price : 'DEFAULT';
 
   const addToCart = () => {
     addItemToCart(product, () => {

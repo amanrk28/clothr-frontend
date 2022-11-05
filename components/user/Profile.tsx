@@ -1,5 +1,5 @@
-import React from "react";
-import Base from "components/core/Base";
+import React from 'react';
+import Base from 'components/core/Base';
 
 const Profile = () => {
   return (

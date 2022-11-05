@@ -1,6 +1,6 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { isAutheticated } from "./index";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { isAutheticated } from './index';
 
 const PrivateRoute = ({ component: Component }) => {
   const router = useRouter();

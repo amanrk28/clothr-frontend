@@ -1,21 +1,24 @@
-import { Category } from "./types";
+import React from 'react';
+import { Category, ProductFormValues } from './types';
 
-const inputClasses = "w-full bg-inherit border-t-0 border-x-0 border-neutral-500 focus:outline-none focus:shadow-none focus:border-neutral-500 focus:ring-0 placeholder:text-neutral-500 placeholder:opacity-40";
+const inputClasses = 'w-full bg-inherit border-t-0 border-x-0 border-neutral-500 focus:outline-none focus:shadow-none focus:border-neutral-500 focus:ring-0 placeholder:text-neutral-500 placeholder:opacity-40';
 
 interface ProductFormProps {
     handleChange: (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+    uploadPhoto: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
     categories: Category[];
-    values: any;
+    values: ProductFormValues;
     isUpdate?: boolean;
 }
 
 export const ProductForm = ({
     handleChange,
+    uploadPhoto,
+    onSubmit,
     values,
     categories,
-    onSubmit,
-    isUpdate = false
+    isUpdate = false,
 }: ProductFormProps) => {
     return (
         <form>
@@ -25,7 +28,7 @@ export const ProductForm = ({
                 </button>
                 <input
                     required
-                    onChange={handleChange("photo")}
+                    onChange={uploadPhoto}
                     type="file"
                     id="photo"
                     accept="image/*"
@@ -38,7 +41,7 @@ export const ProductForm = ({
                 <input
                     required
                     id="name"
-                    onChange={handleChange("name")}
+                    onChange={handleChange('name')}
                     placeholder="Black T-shirt"
                     type="text"
                     value={values.name}
@@ -49,7 +52,7 @@ export const ProductForm = ({
                 <label htmlFor="description">Description</label>
                 <textarea
                     required
-                    onChange={handleChange("description")}
+                    onChange={handleChange('description')}
                     id="description"
                     value={values.description}
                     className={inputClasses}
@@ -61,7 +64,7 @@ export const ProductForm = ({
                 <input
                     required
                     id="price"
-                    onChange={handleChange("price")}
+                    onChange={handleChange('price')}
                     type="number"
                     value={values.price}
                     className={inputClasses}
@@ -73,7 +76,7 @@ export const ProductForm = ({
                 <select
                     required
                     id="category"
-                    onChange={handleChange("category")}
+                    onChange={handleChange('category')}
                     className={inputClasses}
                 >
                     {categories &&
@@ -89,7 +92,7 @@ export const ProductForm = ({
                 <input
                     required
                     id="stock"
-                    onChange={handleChange("stock")}
+                    onChange={handleChange('stock')}
                     type="number"
                     className={inputClasses}
                     value={values.stock}

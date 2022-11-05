@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { isAutheticated } from "../auth/helper";
-import { createCategory } from "./helper/admin-api";
-import { AdminLayout } from "./layout";
-import { CategoryForm } from "./CategoryForm";
+import { isAutheticated } from '../auth/helper';
+import { createCategory } from './helper/admin-api';
+import { AdminLayout } from './layout';
+import { CategoryForm } from './CategoryForm';
 
 const AddCategory = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const router = useRouter();
 
   const { user } = isAutheticated();
@@ -20,17 +20,17 @@ const AddCategory = () => {
     event.preventDefault();
     toast.promise(createCategory(user._id, { name }), {
       loading: 'Creating new category...',
-      success: (data) => {
+      success: data => {
         if (data.error) {
           throw data.error;
         } else {
-          setName("");
+          setName('');
           router.push('/admin/categories');
-          return 'New category created'
+          return 'New category created';
         }
       },
-      error: 'Failed to create category!'
-    })
+      error: 'Failed to create category!',
+    });
   };
 
   return (

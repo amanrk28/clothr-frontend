@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
-import { isAutheticated } from "../auth/helper";
-import { getProducts, deleteProduct } from "./helper/admin-api";
-import { Product } from "components/types";
-import { AdminLayout } from "./layout";
+import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { isAutheticated } from '../auth/helper';
+import { getProducts, deleteProduct } from './helper/admin-api';
+import { Product } from 'components/types';
+import { AdminLayout } from './layout';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -22,8 +22,7 @@ const ManageProducts = () => {
   };
 
   useEffect(() => {
-    if (products.length === 0)
-      preload();
+    preload();
   }, []);
 
   const updateThisProduct = (product: Product) => (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,14 +34,14 @@ const ManageProducts = () => {
     event.preventDefault();
     toast.promise(deleteProduct(product._id, user._id), {
       loading: `Deleting ${product.name}`,
-      success: (data) => {
+      success: data => {
         if (data.error) throw data.error;
         else {
           preload();
           return 'Deleted product successfully'
         }
       },
-      error: 'Failed to delete product'
+      error: 'Failed to delete product',
     })
   };
 

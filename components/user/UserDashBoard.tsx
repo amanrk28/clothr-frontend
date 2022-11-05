@@ -1,5 +1,5 @@
-import React from "react";
-import Base from "../core/Base";
+import React from 'react';
+import Base from '../core/Base';
 
 const UserDashBoard = () => {
   return (

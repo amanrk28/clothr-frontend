@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 import { useRouter } from 'next/router'
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { isAutheticated } from "components/auth/helper";
-import Base from "components/core/Base"
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { isAutheticated } from 'components/auth/helper';
+import Base from 'components/core/Base'
 
 interface Props {
     title: string;
@@ -57,7 +57,7 @@ export const RightSide: React.FC<RightSideProps> = ({ title, children }) => {
 export const AdminLayout: React.FC<Props> = ({
     children,
     title,
-    className = ''
+    className = '',
 }) => {
     const { user, token } = isAutheticated();
     const router = useRouter();
@@ -65,8 +65,12 @@ export const AdminLayout: React.FC<Props> = ({
         if (!user || !token) {
             toast.error('Login to view dashboard');
             router.push('/');
+        } else if (user && user.role !== 1) {
+            toast.error('You do not have permission to view this page');
+            router.push('/');
         }
-    }, []);
+    }, [router, token, user]);
+
     return (
         <Base
             title=""

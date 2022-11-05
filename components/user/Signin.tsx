@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Base from "components/core/Base";
-import { signin, authenticate, isAutheticated } from "components/auth/helper";
-import { useRouter } from "next/router";
+import React, { useState, useEffect } from 'react';
+import Base from 'components/core/Base';
+import { signin, authenticate, isAutheticated } from 'components/auth/helper';
+import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 
-export const inputClasses = "w-full bg-transparent border-t-0 border-x-0 border-white focus:outline-none focus:shadow-none focus:border-white focus:ring-0 placeholder:text-white placeholder:opacity-40";
+export const inputClasses = 'w-full bg-transparent border-t-0 border-x-0 border-white focus:outline-none focus:shadow-none focus:border-white focus:ring-0 placeholder:text-white placeholder:opacity-40';
 
 const Signin = () => {
   const router = useRouter();
   const [values, setValues] = useState({
-    email: "",
-    password: "",
-    didRedirect: false
+    email: '',
+    password: '',
+    didRedirect: false,
   });
 
   const { email, password, didRedirect } = values;
@@ -28,7 +28,7 @@ const Signin = () => {
     if (user) {
       router.push('/');
     }
-  }, [didRedirect]);
+  }, [didRedirect, router, user]);
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [fieldName]: event.target.value });
@@ -38,14 +38,14 @@ const Signin = () => {
     event.preventDefault();
     toast.promise(signin({ email, password }), {
       loading: 'Signing In...',
-      success: (data) => {
+      success: data => {
         if (data.error) {
           throw data.error;
         } else {
           authenticate(data, () => {
             setValues({
               ...values,
-              didRedirect: true
+              didRedirect: true,
             });
           });
           return 'Signin Successful'
@@ -62,7 +62,7 @@ const Signin = () => {
           <div className="py-4">
             <label htmlFor="email" className="text-light">Email </label>
             <input
-              onChange={handleChange("email")}
+              onChange={handleChange('email')}
               value={email}
               className={inputClasses}
               type="email"
@@ -72,8 +72,8 @@ const Signin = () => {
           <div className="py-4">
             <label htmlFor="password" className="text-light">Password </label>
             <input
-              id='password'
-              onChange={handleChange("password")}
+              id="password"
+              onChange={handleChange('password')}
               value={password}
               className={inputClasses}
               type="password"

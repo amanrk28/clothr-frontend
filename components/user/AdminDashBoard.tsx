@@ -1,6 +1,6 @@
-import React from "react";
-import { isAutheticated } from "../auth/helper/index";
-import { AdminLayout } from "components/admin/layout";
+import React from 'react';
+import { isAutheticated } from '../auth/helper/index';
+import { AdminLayout } from 'components/admin/layout';
 
 const AdminDashBoard = () => {
   const { user } = isAutheticated();

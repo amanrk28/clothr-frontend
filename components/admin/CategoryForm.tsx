@@ -1,6 +1,7 @@
-import React from "react";
+import { useRouter } from 'next/router';
+import React from 'react';
 
-const inputClasses = "w-full bg-inherit border-t-0 border-x-0 border-neutral-500 focus:outline-none focus:shadow-none focus:border-neutral-500 focus:ring-0 placeholder:text-neutral-500 placeholder:opacity-40";
+const inputClasses = 'w-full bg-inherit border-t-0 border-x-0 border-neutral-500 focus:outline-none focus:shadow-none focus:border-neutral-500 focus:ring-0 placeholder:text-neutral-500 placeholder:opacity-40';
 
 interface Props {
     handleChange: (value: string) => void;
@@ -13,8 +14,9 @@ export const CategoryForm: React.FC<Props> = ({
     handleChange,
     name,
     onSubmit,
-    isUpdate = false
+    isUpdate = false,
 }) => {
+    const router = useRouter();
     return (
         <form>
             <div className="py-4">
@@ -24,7 +26,7 @@ export const CategoryForm: React.FC<Props> = ({
                     required
                     id="categoryName"
                     type="text"
-                    onChange={(e) => handleChange(e.target.value)}
+                    onChange={e => handleChange(e.target.value)}
                     className={inputClasses}
                     value={name}
                     placeholder="For Ex. Summer"
@@ -34,7 +36,7 @@ export const CategoryForm: React.FC<Props> = ({
                         {isUpdate ? 'Update' : 'Create'} Category
                     </button>
                     {isUpdate ? (
-                        <button onClick={onSubmit} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-red-600 text-red-600 bg-transparent hover:text-white hover:bg-red-600 hover:shadow-md duration-300">
+                        <button onClick={() => router.push('/admin/categories')} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-red-600 text-red-600 bg-transparent hover:text-white hover:bg-red-600 hover:shadow-md duration-300">
                             Cancel
                         </button>
                     ) : null}

@@ -1,10 +1,10 @@
-import { Product } from "components/types";
-import React, { useState, useEffect } from "react";
-import Base from "./Base";
-import Card from "./Card";
-import { getProducts } from "./helper/core-api";
+import { Product } from 'components/types';
+import React, { useState, useEffect } from 'react';
+import Base from './Base';
+import Card from './Card';
+import { getProducts } from './helper/core-api';
 
-export default function Home() {
+const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   const loadAllProduct = () => {
@@ -18,8 +18,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (products.length === 0)
-      loadAllProduct();
+    loadAllProduct();
   }, []);
 
   return (
@@ -34,3 +33,5 @@ export default function Home() {
     </Base>
   );
 }
+
+export default Home;

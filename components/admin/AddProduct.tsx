@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { getCategories, createProduct } from "./helper/admin-api";
-import { isAutheticated } from "../auth/helper/index";
-import { Category } from "./types";
-import { ProductForm } from "./ProductForm";
-import { AdminLayout } from "./layout";
+import React, { useState, useEffect } from 'react';
+import { getCategories, createProduct } from './helper/admin-api';
+import { isAutheticated } from '../auth/helper/index';
+import { Category, ProductFormValues } from './types';
+import { ProductForm } from './ProductForm';
+import { AdminLayout } from './layout';
 
 const AddProduct = () => {
   const { user } = isAutheticated();
-  const [values, setValues] = useState({
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    photo: "",
-    category: "",
+  const [values, setValues] = useState<ProductFormValues>({
+    name: '',
+    description: '',
+    price: '',
+    stock: '',
+    photo: null,
+    category: '',
     formData: new FormData(),
   });
   const [categories, setCategories] = useState<Category[]>([]);
@@ -40,11 +40,12 @@ const AddProduct = () => {
       } else {
         setValues({
           ...values,
-          name: "",
-          description: "",
-          price: "",
-          photo: "",
-          stock: "",
+          name: '',
+          description: '',
+          price: '',
+          photo: null,
+          stock: '',
+          formData: new FormData(),
         });
       }
     });
@@ -53,14 +54,20 @@ const AddProduct = () => {
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    const value = fieldName === "photo" ? event.target.files[0] : event.target.value;
+    const { value } = event.target;
     values.formData.set(fieldName, value);
     setValues({ ...values, [fieldName]: value });
   };
 
+  const uploadPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+    values.formData.set('photo', files[0]);
+    setValues({ ...values, photo: files[0] });
+  };
+
   return (
     <AdminLayout title="Create new product">
-      <ProductForm categories={categories} values={values} handleChange={handleChange} onSubmit={onSubmit} />
+      <ProductForm categories={categories} values={values} handleChange={handleChange} onSubmit={onSubmit} uploadPhoto={uploadPhoto} />
     </AdminLayout>
   );
 };

@@ -1,8 +1,8 @@
 import { Category } from './../types';
-import { apiCall } from "../../backend";
+import { apiCall } from '../../backend';
 
 //category calls
-export const createCategory = (userId: string, category: Pick<Category, "name">) => {
+export const createCategory = (userId: string, category: Pick<Category, 'name'>) => {
   return apiCall('post', `/category/create/${userId}`, category)
 };
 

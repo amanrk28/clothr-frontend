@@ -1,12 +1,12 @@
-import Link from "next/link";
+import Link from 'next/link';
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
-import { isAutheticated } from "components/auth/helper";
-import { Product } from "components/types";
-import Base from "./Base";
-import Card from "./Card";
-import { loadCart } from "./helper/cartHelper";
+import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { isAutheticated } from 'components/auth/helper';
+import { Product } from 'components/types';
+import Base from './Base';
+import Card from './Card';
+import { loadCart } from './helper/cartHelper';
 
 const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -19,7 +19,7 @@ const Cart = () => {
       toast.error('Login to view cart');
       router.push('/');
     }
-  }, [])
+  }, [router, token, user])
 
   useEffect(() => {
     setProducts(loadCart());
@@ -36,7 +36,7 @@ const Cart = () => {
                 <div key={index} className="p-6">
                   <Card
                     product={product}
-                    removeFromCart={true}
+                    removeFromCart
                     addtoCart={false}
                     setReload={setReload}
                     reload={reload}

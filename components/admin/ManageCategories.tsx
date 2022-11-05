@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { isAutheticated } from "../auth/helper";
-import { deleteCategory, getCategories } from "./helper/admin-api";
-import toast from "react-hot-toast";
-import { Category } from "./types";
-import { AdminLayout } from "./layout";
+import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import { isAutheticated } from '../auth/helper';
+import { deleteCategory, getCategories } from './helper/admin-api';
+import toast from 'react-hot-toast';
+import { Category } from './types';
+import { AdminLayout } from './layout';
 
 const ManageCategories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -26,13 +26,13 @@ const ManageCategories = () => {
     router.push(`/admin/update/category/${category._id}`)
   }
 
-  const onDeleteCategory = (category) => (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onDeleteCategory = category => (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const userId = user._id;
     const categoryId = category._id;
     toast.promise(deleteCategory(categoryId, userId), {
       loading: `Deleting ${category.name} category...`,
-      success: (data) => {
+      success: data => {
         if (data?.error) {
           throw data.error;
         } else {
@@ -40,13 +40,12 @@ const ManageCategories = () => {
           return 'Category deleted successfully'
         }
       },
-      error: 'Failed to delete category!'
+      error: 'Failed to delete category!',
     })
   }
 
   useEffect(() => {
-    if (categories.length === 0)
-      preload();
+    preload();
   }, []);
 
   return (

@@ -1,33 +1,43 @@
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
+import { useRouter } from 'next/router';
+import React, { useState, useEffect, useCallback } from 'react';
+import toast from 'react-hot-toast';
 import {
   getCategories,
   getProduct,
-  updateProduct
-} from "./helper/admin-api";
-import { isAutheticated } from "../auth/helper";
-import { Category } from "./types";
-import { ProductForm } from "./ProductForm";
-import { AdminLayout } from "./layout";
+  updateProduct,
+} from './helper/admin-api';
+import { isAutheticated } from '../auth/helper';
+import { Category, ProductFormValues } from './types';
+import { ProductForm } from './ProductForm';
+import { AdminLayout } from './layout';
 
 const UpdateProduct = () => {
   const { user } = isAutheticated();
   const router = useRouter();
 
-  const [values, setValues] = useState({
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    photo: "",
-    category: "",
+  const [values, setValues] = useState<ProductFormValues>({
+    name: '',
+    description: '',
+    price: '',
+    stock: '',
+    photo: null,
+    category: '',
     formData: new FormData(),
   });
 
-  const [categories, setCategories] = useState<Category[]>([])
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const preload = () => {
+  const preloadCategories = useCallback(() => {
+    getCategories().then(data => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setCategories(data);
+      }
+    });
+  }, []);
+
+  const preload = useCallback(() => {
     if (!router.query.productId) return;
     getProduct(router.query?.productId?.toString()).then(data => {
       if (data.error) {
@@ -41,25 +51,15 @@ const UpdateProduct = () => {
           price: data.price,
           category: data.category._id,
           stock: data.stock,
-          formData: new FormData()
+          formData: new FormData(),
         });
       }
     });
-  };
-
-  const preloadCategories = () => {
-    getCategories().then(data => {
-      if (data.error) {
-        console.log(data.error);
-      } else {
-        setCategories(data);
-      }
-    });
-  };
+  }, [preloadCategories, router.query.productId, values]);
 
   useEffect(() => {
     preload();
-  }, [router.query]);
+  }, [preload, router.query]);
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -74,23 +74,29 @@ const UpdateProduct = () => {
           return 'Product Details Updated';
         }
       },
-      error: 'Failed to update product details!'
+      error: 'Failed to update product details!',
     })
   };
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    const value = fieldName === "photo" ? event.target.files[0] : event.target.value;
+    const { value } = event.target;
     values.formData.set(fieldName, value);
     setValues({ ...values, [fieldName]: value });
   };
+
+  const uploadPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+    values.formData.set('photo', files[0]);
+    setValues({ ...values, photo: files[0] });
+  }
 
   return (
     <AdminLayout
       title="Update product details"
     >
-      <ProductForm isUpdate categories={categories} values={values} handleChange={handleChange} onSubmit={onSubmit} />
+      <ProductForm isUpdate categories={categories} values={values} handleChange={handleChange} uploadPhoto={uploadPhoto} onSubmit={onSubmit} />
     </AdminLayout>
   );
 };

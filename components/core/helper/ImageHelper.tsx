@@ -1,6 +1,6 @@
-import React from "react";
-import { Product } from "components/types";
-import { API } from "../../backend";
+import React from 'react';
+import { Product } from 'components/types';
+import { API } from '../../backend';
 
 export const ImageHelper = ({ product }: { product: Product }) => {
   const imageurl = product

@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
+import { useRouter } from 'next/router';
+import React, { useState, useEffect, useCallback } from 'react';
+import toast from 'react-hot-toast';
 import {
     getCategory,
     updateCategory,
-} from "./helper/admin-api";
-import { isAutheticated } from "../auth/helper";
-import { AdminLayout } from "./layout";
-import { CategoryForm } from "./CategoryForm";
+} from './helper/admin-api';
+import { isAutheticated } from '../auth/helper';
+import { AdminLayout } from './layout';
+import { CategoryForm } from './CategoryForm';
 
 const UpdateCategory = () => {
     const { user } = isAutheticated();
@@ -15,7 +15,7 @@ const UpdateCategory = () => {
 
     const [name, setName] = useState<string>('');
 
-    const preload = () => {
+    const preload = useCallback(() => {
         getCategory(router.query?.categoryId?.toString()).then(data => {
             if (data.error) {
                 console.log(data.error);
@@ -23,11 +23,11 @@ const UpdateCategory = () => {
                 setName(data.name);
             }
         });
-    };
+    }, [router.query?.categoryId]);
 
     useEffect(() => {
         preload();
-    }, [router.query]);
+    }, [preload, router.query]);
 
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -43,7 +43,7 @@ const UpdateCategory = () => {
                     return 'Category Updated';
                 }
             },
-            error: 'Failed to update category!'
+            error: 'Failed to update category!',
         })
     };
 
