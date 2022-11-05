@@ -5,4 +5,8 @@ module.exports = {
     images: {
         domains: ['localhost'],
     },
+    i18n: {
+        defaultLocale: 'en-US',
+        locales: ['en-US'],
+    },
 }
