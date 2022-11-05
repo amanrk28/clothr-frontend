@@ -46,13 +46,13 @@ const ManageProducts = () => {
   return (
     <AdminLayout title="Manage Products">
       {products.map((product, index) => (
-        <div key={index} className="flex flex-col md:flex-row justify-between md:items-center border-b-2 p-2">
+        <div key={index} className="flex flex-col md:flex-row justify-between md:items-center border-b-2 p-2 even:bg-stone-800">
           <h3 className="text-xl">{product.name}</h3>
-          <div className="flex justify-between text-center">
-            <button onClick={updateThisProduct(product)} className="bg-blue-500 text-white px-4 py-2 rounded mx-2">
+          <div className="flex justify-between text-center my-4">
+            <button onClick={updateThisProduct(product)} className="bg-blue-500 text-white px-4 py-2 rounded md:mx-2">
               Update
             </button>
-            <button onClick={deleteThisProduct(product)} className="btn-grad-danger text-white px-4 py-2 rounded mx-2">
+            <button onClick={deleteThisProduct(product)} className="btn-grad-danger text-white px-4 py-2 rounded md:mx-2">
               Delete
             </button>
           </div>

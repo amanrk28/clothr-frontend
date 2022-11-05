@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Category, ProductFormValues } from './types';
 
@@ -20,6 +21,7 @@ export const ProductForm = ({
     categories,
     isUpdate = false,
 }: ProductFormProps) => {
+    const router = useRouter();
     return (
         <form>
             <div className="py-4 flex flex-col items-center justify-center relative">
@@ -99,10 +101,16 @@ export const ProductForm = ({
                     placeholder="200"
                 />
             </div>
-            <button onClick={onSubmit} className="rounded p-4 w-full mt-6 font-semibold border border-green-600 text-green-600 bg-transparent hover:text-white hover:bg-green-600 hover:shadow-md duration-300">
-                {isUpdate ? 'Update' : 'Create'} Product
-            </button>
-
+            <div className="flex flex-col md:flex-row justify-between">
+                <button onClick={onSubmit} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-green-600 text-green-600 bg-transparent hover:text-white hover:bg-green-600 hover:shadow-md duration-300">
+                    {isUpdate ? 'Update' : 'Create'} Product
+                </button>
+                {isUpdate ? (
+                    <button onClick={() => router.back()} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-red-600 text-red-600 bg-transparent hover:text-white hover:bg-red-600 hover:shadow-md duration-300">
+                        Cancel
+                    </button>
+                ) : null}
+            </div>
         </form>
     )
 }

@@ -3,7 +3,7 @@ module.exports = {
     reactStrictMode: false,
     swcMinify: true,
     images: {
-        domains: ['localhost'],
+        domains: ['localhost', 'www.datocms-assets.com'],
     },
     i18n: {
         defaultLocale: 'en-US',

@@ -1,17 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  background: #1c1917;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+  background: #202020;
+  font-family: "Jost";
   font-weight: 400;
-  font-display: swap;
 }
 
 /* Chrome, Safari, Edge, Opera */

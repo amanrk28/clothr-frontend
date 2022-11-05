@@ -75,7 +75,7 @@ export const AdminLayout: React.FC<Props> = ({
         <Base
             title=""
             description=""
-            className={`text-white md:h-[calc(100vh-80px)] flex flex-col md:flex-row justify-center items-start ${className}`}
+            className={`text-white min-h-[calc(100vh-80px)] md:h-[calc(100vh-80px)] flex flex-col md:flex-row justify-start md:justify-center items-start ${className}`}
         >
             <LeftSide />
             <RightSide title={title}>

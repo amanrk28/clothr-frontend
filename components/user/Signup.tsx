@@ -59,7 +59,7 @@ const Signup = () => {
   }
 
   return (
-    <Base title="Sign up page" description="" className="py-20 px-4 text-white">
+    <Base title="Sign up page" description="" className="px-4 text-white">
       <div className="bg-neutral-500 max-w-lg m-auto p-4 rounded">
         <form>
           <div className="py-4">

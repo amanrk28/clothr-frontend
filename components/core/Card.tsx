@@ -37,7 +37,7 @@ const Card = ({
       <div className="w-full h-full flex flex-col items-center">
         <ImageHelper product={product} />
         <h1 className="text-xl font-semibold pt-8">{cartTitle}</h1>
-        <p className="w-full p-2 font-weight-normal truncate">
+        <p className="w-full p-2 font-weight-normal truncate text-center">
           {cartDescrption}
         </p>
         <p className="btn px-4 font-semibold text-xl ">&#8377; {cartPrice}</p>

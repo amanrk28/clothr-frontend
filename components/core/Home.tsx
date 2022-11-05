@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Base title="Home Page">
+    <Base title="">
       <div className="flex flex-wrap justify-center">
         {products.map((product, index) => (
           <div key={index} className="p-6">

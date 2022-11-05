@@ -36,7 +36,7 @@ export const CategoryForm: React.FC<Props> = ({
                         {isUpdate ? 'Update' : 'Create'} Category
                     </button>
                     {isUpdate ? (
-                        <button onClick={() => router.push('/admin/categories')} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-red-600 text-red-600 bg-transparent hover:text-white hover:bg-red-600 hover:shadow-md duration-300">
+                        <button onClick={() => router.back()} className="rounded p-2 md:p-4 w-full mt-6 mx-2 font-semibold border border-red-600 text-red-600 bg-transparent hover:text-white hover:bg-red-600 hover:shadow-md duration-300">
                             Cancel
                         </button>
                     ) : null}
