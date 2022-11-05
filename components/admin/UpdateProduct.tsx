@@ -16,7 +16,7 @@ const UpdateProduct = () => {
   const { user } = isAutheticated();
   const router = useRouter();
 
-  const [values, setValues] = useState<ProductFormValues>({
+  const [values, setValues] = useState<ProductFormValues & { formData: FormData }>({
     name: '',
     description: '',
     price: '',
@@ -38,7 +38,7 @@ const UpdateProduct = () => {
     });
   }, []);
 
-  const preload = useCallback(() => {
+  const preload = () => {
     if (!router.query.productId) return;
     getProduct(router.query?.productId?.toString()).then(data => {
       if (data.error) {
@@ -56,11 +56,11 @@ const UpdateProduct = () => {
         });
       }
     });
-  }, [preloadCategories, router.query.productId, values]);
-
+  };
   useEffect(() => {
     preload();
-  }, [preload, router.query]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -97,7 +97,9 @@ const UpdateProduct = () => {
     <AdminLayout
       title="Update product details"
     >
-      <ProductForm isUpdate categories={categories} values={values} handleChange={handleChange} uploadPhoto={uploadPhoto} onSubmit={onSubmit} />
+      {categories.length > 0 ? (
+        <ProductForm isUpdate categories={categories} values={values} handleChange={handleChange} uploadPhoto={uploadPhoto} onSubmit={onSubmit} />
+      ) : null}
     </AdminLayout>
   );
 };

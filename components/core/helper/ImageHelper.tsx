@@ -8,10 +8,11 @@ export const ImageHelper = ({ product }: { product: Product }) => {
     : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={imageurl}
       alt="photo"
-      className="rounded-t h-fit hover:scale-y-[1.2] duration-300"
+      className="rounded-t h-fit hover:scale-y-110 duration-300"
     />
   );
 };

@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <Base title="Home Page">
       <div className="flex flex-wrap justify-center">
-        {[...products, ...products, ...products, ...products].map((product, index) => (
+        {products.map((product, index) => (
           <div key={index} className="p-6">
             <Card product={product} />
           </div>

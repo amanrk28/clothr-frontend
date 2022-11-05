@@ -1,4 +1,3 @@
-import FormData from 'form-data';
 export interface Category {
     name: string;
     createdAt: string;
@@ -13,5 +12,4 @@ export interface ProductFormValues {
     stock: string
     photo: File | null
     category: string
-    formData: FormData,
 }
