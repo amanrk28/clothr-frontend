@@ -35,8 +35,7 @@ const Signup = () => {
     setValues({ ...values, [fieldName]: event.target.value });
   };
 
-  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onSubmit = () => {
     setValues({ ...values });
     toast.promise(signup({ name, email, password }), {
       loading: 'Signing Up...',

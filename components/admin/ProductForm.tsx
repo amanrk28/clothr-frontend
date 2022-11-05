@@ -6,7 +6,7 @@ const inputClasses = 'w-full bg-inherit border-t-0 border-x-0 border-neutral-500
 interface ProductFormProps {
     handleChange: (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
     uploadPhoto: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onSubmit: () => void;
     categories: Category[];
     values: ProductFormValues;
     isUpdate?: boolean;

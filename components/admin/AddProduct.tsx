@@ -40,8 +40,7 @@ const AddProduct = () => {
     preload();
   }, []);
 
-  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onSubmit = () => {
     const { name, description, price, photo, stock, category } = values;
     if (!name && !description && !price && !stock && !photo && !category) {
       return toast.error('Enter all details to proceed!')
@@ -66,8 +65,6 @@ const AddProduct = () => {
   };
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
     const { value } = event.target;
     setValues({ ...values, [fieldName]: value });
   };

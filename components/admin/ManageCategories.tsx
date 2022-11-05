@@ -21,13 +21,11 @@ const ManageCategories = () => {
     });
   };
 
-  const onUpdateCategory = (category: Category) => (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onUpdateCategory = (category: Category) => () => {
     router.push(`/admin/update/category/${category._id}`)
   }
 
-  const onDeleteCategory = category => (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onDeleteCategory = category => () => {
     const userId = user._id;
     const categoryId = category._id;
     toast.promise(deleteCategory(categoryId, userId), {

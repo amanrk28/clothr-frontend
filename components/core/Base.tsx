@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 interface BaseProps {
@@ -26,9 +27,12 @@ const Base: React.FC<BaseProps> = ({
     <footer className="h-40 w-full flex flex-col items-center justify-center shadow-xl border-[0.02rem] border-gray-400 border-opacity-20 bg-black/20 rounded-md lg:rounded-xl backdrop-blur-lg">
       <div className="flex items-center">
         <a href="https://instagram.com/amanrk28" target="_blank" rel="noopener referrer noreferrer">
-          <img
+          <Image
             className="cursor-pointer hover:scale-125 h-20 w-20 duration-300"
             src="/images/aman.png"
+            alt="Aman Khemka"
+            width={80}
+            height={80}
           />
         </a>
       </div>

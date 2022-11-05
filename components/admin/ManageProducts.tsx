@@ -25,13 +25,11 @@ const ManageProducts = () => {
     preload();
   }, []);
 
-  const updateThisProduct = (product: Product) => (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const updateThisProduct = (product: Product) => () => {
     router.push(`/admin/update/product/${product._id}`)
   }
 
-  const deleteThisProduct = (product: Product) => (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const deleteThisProduct = (product: Product) => () => {
     toast.promise(deleteProduct(product._id, user._id), {
       loading: `Deleting ${product.name}`,
       success: data => {

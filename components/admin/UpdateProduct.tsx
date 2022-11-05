@@ -62,8 +62,7 @@ const UpdateProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const onSubmit = () => {
     toast.promise(
       updateProduct(router.query.productId.toString(), user._id, values.formData), {
       loading: `Updating ${values.name} details...`,
@@ -80,8 +79,6 @@ const UpdateProduct = () => {
   };
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
     const { value } = event.target;
     values.formData.append(fieldName, value);
     setValues({ ...values, [fieldName]: value });
