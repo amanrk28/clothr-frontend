@@ -1,5 +1,6 @@
 import { Category } from './../types';
 import { apiCall } from '../../backend';
+import FormData from 'form-data'
 
 //category calls
 export const createCategory = (userId: string, category: Pick<Category, 'name'>) => {

@@ -10,6 +10,7 @@ import { isAutheticated } from '../auth/helper';
 import { Category, ProductFormValues } from './types';
 import { ProductForm } from './ProductForm';
 import { AdminLayout } from './layout';
+import FormData from 'form-data';
 
 const UpdateProduct = () => {
   const { user } = isAutheticated();
@@ -82,13 +83,13 @@ const UpdateProduct = () => {
     event.preventDefault();
     event.stopPropagation();
     const { value } = event.target;
-    values.formData.set(fieldName, value);
+    values.formData.append(fieldName, value);
     setValues({ ...values, [fieldName]: value });
   };
 
   const uploadPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    values.formData.set('photo', files[0]);
+    values.formData.append('photo', files[0]);
     setValues({ ...values, photo: files[0] });
   }
 

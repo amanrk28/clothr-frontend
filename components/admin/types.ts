@@ -1,3 +1,4 @@
+import FormData from 'form-data';
 export interface Category {
     name: string;
     createdAt: string;
