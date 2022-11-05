@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { isAutheticated } from 'components/auth/helper';
+import { useAutheticate } from 'components/auth/helper';
 import Base from 'components/core/Base'
 
 interface Props {
@@ -25,10 +25,10 @@ export const LeftSide = () => {
         <div className="w-full h-full md:w-3/12 p-4 border-b-2 md:border-b-0 md:border-r-2">
             <div className="flex flex-col items-start rounded p-4">
                 {navbarLinks.map((item, index) => (
-                    <Link key={index} href={item.link} className="py-4 pl-4 w-full hover:scale-110 hover:underline transition-all ease-out duration-300">
-                        <p className="relative text-lg">
-                            <span className="absolute -left-4 text-green-600 font-bold">{router.pathname === item.link && '>'}</span> {item.name}
-                        </p>
+                    <Link key={index} href={item.link} legacyBehavior>
+                        <a className="py-4 pl-4 w-full hover:scale-110 hover:underline transition-all ease-out duration-300 relative text-lg">
+                            <span className="absolute -left-2 text-green-600 font-bold">{router.pathname === item.link && '>'}</span> {item.name}
+                        </a>
                     </Link>
                 ))}
             </div>
@@ -59,7 +59,7 @@ export const AdminLayout: React.FC<Props> = ({
     title,
     className = '',
 }) => {
-    const { user, token } = isAutheticated();
+    const { user, token } = useAutheticate();
     const router = useRouter();
     useEffect(() => {
         if (!user || !token) {

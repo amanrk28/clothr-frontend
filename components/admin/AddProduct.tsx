@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCategories, createProduct } from './helper/admin-api';
-import { isAutheticated } from '../auth/helper/index';
+import { useAutheticate } from '../auth/helper/index';
 import { Category, ProductFormValues } from './types';
 import { ProductForm } from './ProductForm';
 import { AdminLayout } from './layout';
@@ -21,7 +21,7 @@ const initialState = {
 }
 
 const AddProduct = () => {
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
   const [values, setValues] = useState<ProductFormValues & { formData: FormData }>(initialState);
   const [categories, setCategories] = useState<Category[]>([]);
   const router = useRouter();

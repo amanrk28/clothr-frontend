@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { isAutheticated } from '../auth/helper';
+import { useAutheticate } from '../auth/helper';
 import { createCategory } from './helper/admin-api';
 import { AdminLayout } from './layout';
 import { CategoryForm } from './CategoryForm';
@@ -10,7 +10,7 @@ const AddCategory = () => {
   const [name, setName] = useState('');
   const router = useRouter();
 
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
 
   const handleChange = (value: string) => {
     setName(value);

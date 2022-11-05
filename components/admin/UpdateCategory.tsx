@@ -5,12 +5,12 @@ import {
     getCategory,
     updateCategory,
 } from './helper/admin-api';
-import { isAutheticated } from '../auth/helper';
+import { useAutheticate } from '../auth/helper';
 import { AdminLayout } from './layout';
 import { CategoryForm } from './CategoryForm';
 
 const UpdateCategory = () => {
-    const { user } = isAutheticated();
+    const { user } = useAutheticate();
     const router = useRouter();
 
     const [name, setName] = useState<string>('');

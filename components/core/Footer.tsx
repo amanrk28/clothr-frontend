@@ -24,7 +24,7 @@ export const Footer = () => {
                     height={35}
                 />
             </a>
-            <p className="py-2">&copy; 2022 clothr</p>
+            <p className="py-2">&copy; 2022 Clothr</p>
         </footer>
     )
 };

@@ -1,5 +1,3 @@
-import { isAutheticated } from './auth/helper';
-
 export const API = process.env.NEXT_PUBLIC_BACKEND;
 
 export type Method =
@@ -9,17 +7,22 @@ export type Method =
   | 'put'
 
 export const apiCall = async (method: Method, url: string, data={}, isFormData = false) => {
-  const {token} = isAutheticated();
+  let userToken = '';
+  if (typeof window !== 'undefined') {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt)
+      userToken = JSON.parse(jwt).token;
+  }
   let headers: Record<string, unknown> = {};
   if (!isFormData) {
     headers = {
       'Content-Type': 'application/json',
     };
   }
-  if (token) {
+  if (userToken) {
     headers = {
       ...headers,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${userToken}`,
     };
   }
   const options: Record<string, unknown> = {

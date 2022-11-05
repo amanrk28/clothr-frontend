@@ -1,9 +1,9 @@
 import React from 'react';
-import { isAutheticated } from '../auth/helper/index';
+import { useAutheticate } from '../auth/helper/index';
 import { AdminLayout } from 'components/admin/layout';
 
 const AdminDashBoard = () => {
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
   return (
     <AdminLayout title="Admin Information">
       <div className="flex flex-col items-start">

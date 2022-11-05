@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { isAutheticated } from 'components/auth/helper';
+import { useAutheticate } from 'components/auth/helper';
 import { Product } from 'components/types';
 import Base from './Base';
 import Card from './Card';
@@ -11,7 +11,7 @@ import { loadCart } from './helper/cartHelper';
 const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [reload, setReload] = useState(false);
-  const { user, token } = isAutheticated();
+  const { user, token } = useAutheticate();
   const router = useRouter();
 
   useEffect(() => {

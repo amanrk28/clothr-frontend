@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { isAutheticated } from '../auth/helper';
+import { useAutheticate } from '../auth/helper';
 import { getProducts, deleteProduct } from './helper/admin-api';
 import { Product } from 'components/types';
 import { AdminLayout } from './layout';
@@ -9,7 +9,7 @@ import { AdminLayout } from './layout';
 const ManageProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const router = useRouter();
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
 
   const preload = () => {
     getProducts().then(data => {
@@ -46,7 +46,7 @@ const ManageProducts = () => {
   return (
     <AdminLayout title="Manage Products">
       {products.map((product, index) => (
-        <div key={index} className="flex flex-col md:flex-row justify-between md:items-center border-b-2 p-2 even:bg-stone-800">
+        <div key={index} className="flex flex-col md:flex-row justify-between md:items-center border-b-2 p-2 even:bg-neutral-800">
           <h3 className="text-xl">{product.name}</h3>
           <div className="flex justify-between text-center my-4">
             <button onClick={updateThisProduct(product)} className="bg-blue-500 text-white px-4 py-2 rounded md:mx-2">

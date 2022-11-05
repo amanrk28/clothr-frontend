@@ -6,4 +6,4 @@ const ManageProductsPage: NextPage = () => {
     return <ManageProducts />
 }
 
-export default ManageProductsPage
+export default ManageProductsPage;

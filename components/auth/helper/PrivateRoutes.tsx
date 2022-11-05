@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { isAutheticated } from './index';
+import { useAutheticate } from './index';
 
 const PrivateRoute = ({ component: Component }) => {
   const router = useRouter();
-  const isAuth = isAutheticated();
+  const isAuth = useAutheticate();
   if (!isAuth) router.push('/');
   return <Component />
 };

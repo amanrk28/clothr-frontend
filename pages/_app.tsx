@@ -5,7 +5,7 @@ import { Menu } from 'components/core/Menu';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
-        <>
+        <div>
             <Menu />
             <Component {...pageProps} />
             <Toaster
@@ -13,7 +13,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                     duration: 4000,
                     position: 'top-center',
                 }} />
-        </>
+        </div>
     );
 }
 

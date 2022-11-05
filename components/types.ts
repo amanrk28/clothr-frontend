@@ -18,7 +18,3 @@ export interface AuthJWT {
         _id: string;
     }
 }
-export const EmptyAuthJWT: AuthJWT = {
-    token: '',
-    user: null,
-}

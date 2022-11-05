@@ -6,14 +6,14 @@ import {
   getProduct,
   updateProduct,
 } from './helper/admin-api';
-import { isAutheticated } from '../auth/helper';
+import { useAutheticate } from '../auth/helper';
 import { Category, ProductFormValues } from './types';
 import { ProductForm } from './ProductForm';
 import { AdminLayout } from './layout';
 import FormData from 'form-data';
 
 const UpdateProduct = () => {
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
   const router = useRouter();
 
   const [values, setValues] = useState<ProductFormValues & { formData: FormData }>({

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Base from '../core/Base';
-import { authenticate, isAutheticated, signup } from '../auth/helper';
+import { authenticate, useAutheticate, signup } from '../auth/helper';
 import { AuthPayload } from 'components/auth/helper/types';
 import { inputClasses } from './Signin';
 import { useRouter } from 'next/router';
@@ -16,7 +16,7 @@ const Signup = () => {
   });
 
   const { name, email, password, didRedirect } = values;
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
 
   useEffect(() => {
     if (didRedirect) {

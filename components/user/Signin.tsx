@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Base from 'components/core/Base';
-import { signin, authenticate, isAutheticated } from 'components/auth/helper';
+import { signin, authenticate, useAutheticate as useAutheticate } from 'components/auth/helper';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 
@@ -15,7 +15,7 @@ const Signin = () => {
   });
 
   const { email, password, didRedirect } = values;
-  const { user } = isAutheticated();
+  const { user } = useAutheticate();
 
   useEffect(() => {
     if (didRedirect) {
@@ -26,7 +26,8 @@ const Signin = () => {
       }
     }
     if (user) {
-      router.push('/');
+      if (user.role === 1) router.push('/admin/dashboard');
+      else router.push('/');
     }
   }, [didRedirect, router, user]);
 
