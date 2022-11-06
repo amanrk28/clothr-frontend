@@ -29,7 +29,7 @@ const AddCategory = () => {
           return 'New category created';
         }
       },
-      error: 'Failed to create category!',
+      error: err => err || 'Failed to create category!',
     });
   };
 

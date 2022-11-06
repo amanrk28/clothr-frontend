@@ -1,6 +1,6 @@
 {
-  "name": "projfrontend",
-  "version": "0.1.0",
+  "name": "clothr",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "form-data": "^4.0.0",

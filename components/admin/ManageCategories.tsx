@@ -38,7 +38,7 @@ const ManageCategories = () => {
           return 'Category deleted successfully'
         }
       },
-      error: 'Failed to delete category!',
+      error: err => err || 'Failed to delete category!',
     })
   }
 

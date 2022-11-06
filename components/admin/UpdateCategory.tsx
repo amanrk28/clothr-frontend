@@ -42,7 +42,7 @@ const UpdateCategory = () => {
                     return 'Category Updated';
                 }
             },
-            error: 'Failed to update category!',
+            error: err => err || 'Failed to update category!',
         })
     };
 

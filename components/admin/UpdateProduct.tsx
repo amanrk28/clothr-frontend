@@ -74,7 +74,7 @@ const UpdateProduct = () => {
           return 'Product Details Updated';
         }
       },
-      error: 'Failed to update product details!',
+      error: err => err || 'Failed to update product details!',
     })
   };
 

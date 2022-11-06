@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Base from 'components/core/Base';
 import { signin, authenticate, useAutheticate as useAutheticate } from 'components/auth/helper';
 import { useRouter } from 'next/router';
@@ -14,11 +14,10 @@ const Signin = () => {
     didRedirect: false,
   });
 
-  const { email, password, didRedirect } = values;
   const { user } = useAutheticate();
 
   useEffect(() => {
-    if (didRedirect) {
+    if (values.didRedirect) {
       if (user && user?.role === 1) {
         router.push('/admin/dashboard');
       } else {
@@ -29,13 +28,15 @@ const Signin = () => {
       if (user.role === 1) router.push('/admin/dashboard');
       else router.push('/');
     }
-  }, [didRedirect, router, user]);
+  }, [values.didRedirect, router, user]);
 
   const handleChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [fieldName]: event.target.value });
   };
 
-  const onSubmit = () => {
+  const onSubmit = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const { email, password } = values;
     toast.promise(signin({ email, password }), {
       loading: 'Signing In...',
       success: data => {
@@ -51,9 +52,9 @@ const Signin = () => {
           return 'Signin Successful'
         }
       },
-      error: 'Signin request failed',
+      error: err => err || 'Signin request failed',
     })
-  };
+  }, [values]);
 
   return (
     <Base title="Sign In " description="" className="px-4 text-white">
@@ -63,7 +64,7 @@ const Signin = () => {
             <label htmlFor="email" className="text-light">Email </label>
             <input
               onChange={handleChange('email')}
-              value={email}
+              value={values.email}
               className={inputClasses}
               type="email"
               placeholder="example@email.com"
@@ -74,7 +75,7 @@ const Signin = () => {
             <input
               id="password"
               onChange={handleChange('password')}
-              value={password}
+              value={values.password}
               className={inputClasses}
               type="password"
             />

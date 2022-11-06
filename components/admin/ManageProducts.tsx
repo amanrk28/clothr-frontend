@@ -39,7 +39,7 @@ const ManageProducts = () => {
           return 'Deleted product successfully'
         }
       },
-      error: 'Failed to delete product',
+      error: err => err || 'Failed to delete product',
     })
   };
 

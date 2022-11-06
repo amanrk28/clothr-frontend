@@ -60,7 +60,7 @@ const AddProduct = () => {
           return `New product created`;
         }
       },
-      error: 'Failed to create product',
+      error: err => err || 'Failed to create product',
     })
   };
 
