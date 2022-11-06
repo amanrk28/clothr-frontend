@@ -10,7 +10,7 @@ export const PageHead = ({ title, description }: Props) => {
         <Head>
             <title>{title}</title>
             <meta name="description" content={description} />
-            <link rel="icon" href="/images/clothr.png" />
+            <link rel="icon" href="/images/clothr-dark.png" />
         </Head>
     );
 }

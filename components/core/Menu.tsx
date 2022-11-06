@@ -31,8 +31,11 @@ export const Menu = () => {
 
   return (
     <nav className="flex w-full justify-between sm:justify-start items-center p-4 py-6 bg-black/20 shadow-xl border-[0.02rem] border-gray-400 border-opacity-20">
-      <Link href="/">
+      <Link href="/" className="hidden md:block">
         <Image src="/images/clothr.png" alt="clothr" width={100} height={45} className="mr-4" priority />
+      </Link>
+      <Link href="/" className="block md:hidden">
+        <Image src="/images/clothr-light.png" alt="clothr" width={45} height={45} priority />
       </Link>
       {/* {user && user?.role === 0 && (
         <Link style={currentTab('/user/dashboard')} className={common} href="/user/dashboard">
