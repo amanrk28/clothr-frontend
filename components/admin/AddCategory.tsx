@@ -16,7 +16,8 @@ const AddCategory = () => {
     setName(value);
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (!name) return toast.error('Enter category name to proceed!');
     toast.promise(createCategory(user._id, { name }), {
       loading: 'Creating new category...',

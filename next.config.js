@@ -3,7 +3,7 @@ module.exports = {
     reactStrictMode: false,
     swcMinify: true,
     images: {
-        domains: ['localhost', 'www.datocms-assets.com'],
+        domains: ['localhost', 'www.datocms-assets.com', 'res.cloudinary.com'],
     },
     i18n: {
         defaultLocale: 'en-US',

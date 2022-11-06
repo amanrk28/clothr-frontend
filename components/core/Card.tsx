@@ -35,7 +35,7 @@ const Card = ({
   return (
     <div className={`text-white w-[300px] h-[380px] flex flex-col items-center shadow-lg ${addtoCart ? 'shadow-green-500/60' : ''} ${removeFromCart ? 'shadow-gray-500/60' : ''}`}>
       <div className="w-full h-full flex flex-col items-center">
-        <ImageHelper product={product} />
+        <ImageHelper image={product?.photo || ''} />
         <h1 className="text-xl font-semibold pt-8">{cartTitle}</h1>
         <p className="w-full p-2 font-weight-normal truncate text-center">
           {cartDescrption}

@@ -6,7 +6,7 @@ const inputClasses = 'w-full bg-inherit border-t-0 border-x-0 border-neutral-500
 interface Props {
     handleChange: (value: string) => void;
     name: string;
-    onSubmit: () => void;
+    onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
     isUpdate?: boolean;
 }
 

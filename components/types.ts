@@ -7,6 +7,7 @@ export interface Product {
     sold: number;
     stock: number;
     _id: string;
+    photo?: string;
 }
 
 export interface AuthJWT {

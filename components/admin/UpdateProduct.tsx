@@ -1,3 +1,4 @@
+import FormData from 'form-data';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
@@ -6,11 +7,10 @@ import {
   getProduct,
   updateProduct,
 } from './helper/admin-api';
-import { useAutheticate } from '../auth/helper';
-import { Category, ProductFormValues } from './types';
-import { ProductForm } from './ProductForm';
 import { AdminLayout } from './layout';
-import FormData from 'form-data';
+import { ProductForm } from './ProductForm';
+import { Category, ProductFormValues } from './types';
+import { useAutheticate } from '../auth/helper';
 
 const UpdateProduct = () => {
   const { user } = useAutheticate();
@@ -62,7 +62,8 @@ const UpdateProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     toast.promise(
       updateProduct(router.query.productId.toString(), user._id, values.formData), {
       loading: `Updating ${values.name} details...`,

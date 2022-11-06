@@ -1,16 +1,10 @@
 import React from 'react';
-import { Product } from 'components/types';
-import { API } from '../../backend';
 import Image from 'next/image';
 
-export const ImageHelper = ({ product }: { product: Product }) => {
-  const imageurl = product
-    ? `${API}/product/photo/${product._id}`
-    : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
-
+export const ImageHelper = ({ image }: { image?: string }) => {
   return (
     <Image
-      src={imageurl}
+      src={image}
       alt="photo"
       className="rounded-t h-fit hover:scale-y-110 duration-300"
       width={300}

@@ -29,7 +29,8 @@ const UpdateCategory = () => {
         preload();
     }, [preload, router.query]);
 
-    const onSubmit = () => {
+    const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         toast.promise(
             updateCategory(router.query.productId.toString(), user._id, { name }), {
             loading: `Updating category...`,
